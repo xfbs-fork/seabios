@@ -86,13 +86,15 @@ static void raw_data_format_adjust_32bpp(u8 *src, u8 *dest, int width,
                                         int height, int bytes_per_line_dest)
 {
     int bytes_per_line_src = 4 * width;
-    int i;
+    int i, j;
     for (i = 0 ; i < height ; i++) {
-        memcpy(
-	    dest + i * bytes_per_line_dest,
-            src + (height - 1 - i) * bytes_per_line_src,
-	    bytes_per_line_src
-	);
+
+        for (j = 0 ; j < width ; j++) {
+              dest[i * bytes_per_line_dest + j*4+0] = src[i * bytes_per_line_src + j*4+2];
+              dest[i * bytes_per_line_dest + j*4+1] = src[i * bytes_per_line_src + j*4+1];
+              dest[i * bytes_per_line_dest + j*4+2] = src[i * bytes_per_line_src + j*4+0];
+              dest[i * bytes_per_line_dest + j*4+3] = src[i * bytes_per_line_src + j*4+3];
+        }
     }
 }
 
