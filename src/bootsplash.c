@@ -119,7 +119,7 @@ enable_bootsplash(void)
     u8 *picture = NULL; /* data buff used to be flushed to the video buf */
     struct jpeg_decdata *jpeg = NULL;
     struct bmp_decdata *bmp = NULL;
-    unsigned char* png; /* png decoder allocates memory itself */
+    unsigned char* png = NULL; /* png decoder allocates memory itself */
     struct vbe_info *vesa_info = malloc_tmplow(sizeof(*vesa_info));
     struct vbe_mode_info *mode_info = malloc_tmplow(sizeof(*mode_info));
     if (!vesa_info || !mode_info) {
