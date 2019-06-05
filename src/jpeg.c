@@ -315,8 +315,13 @@ int jpeg_decode(struct jpeg_decdata *jpeg, unsigned char *buf)
         return ERR_NOT_8BIT;
     jpeg->height = getword(jpeg);
     jpeg->width = getword(jpeg);
+
+    // disable size check for now.
+    /*
     if ((jpeg->height & 15) || (jpeg->width & 15))
         return ERR_BAD_WIDTH_OR_HEIGHT;
+    */
+
     jpeg->info.nc = getbyte(jpeg);
     if (jpeg->info.nc > MAXCOMP)
         return ERR_TOO_MANY_COMPPS;
@@ -409,8 +414,8 @@ int jpeg_show(struct jpeg_decdata *jpeg, unsigned char *pic, int width
     jpgbpl = width * depth / 8;
     mloffset = bytes_per_line_dest > jpgbpl ? bytes_per_line_dest : jpgbpl;
 
-    mcusx = jpeg->width >> 4;
-    mcusy = jpeg->height >> 4;
+    mcusx = (jpeg->width + 15) >> 4;
+    mcusy = (jpeg->height + 15) >> 4;
 
     jpeg->dscans[0].next = 6 - 4;
     jpeg->dscans[1].next = 6 - 4 - 1;
