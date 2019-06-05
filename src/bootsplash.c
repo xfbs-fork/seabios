@@ -179,8 +179,7 @@ enable_bootsplash(void)
               dprintf(1, "bmp_decode failed with return code %d...\n", ret);
               goto done;
           }
-	  bmp_get_size(bmp, &width, &height);
-	  bpp_require = 24;
+          bmp_get_info(bmp, &width, &height, &bpp_require);
           break;
       case 2:
           /* Parse png and get image dimensions. */
@@ -191,7 +190,7 @@ enable_bootsplash(void)
               dprintf(1, "png_decode failed with return code %d...\n", ret);
               goto done;
           }
-	  bpp_require = 32;
+          bpp_require = 32;
           break;
     }
 
