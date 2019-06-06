@@ -107,12 +107,12 @@ enable_bootsplash(void)
       dprintf(3, "Checking for bootsplash\n");
       u8 type = 0; /* 0 means jpg, 1 means bmp, default is 0=jpg */
       int filesize;
-      snprintf(&buffer[0], sizeof(buffer), "bootsplash%i.jpg", i);
+      snprintf(&buffer[0], sizeof(buffer), "bootsplash%d.jpg", i);
       u8 *filedata = romfile_loadfile(&buffer[0], &filesize);
-      dprintf(3, "looking for %s, got %p (size %i).\n", &buffer[0], filedata, filesize);
+      dprintf(3, "looking for %s, got %p (size %d).\n", &buffer[0], filedata, filesize);
       if (!filedata) {
-          snprintf(&buffer[0], sizeof(buffer), "bootsplash%i.bmp", i);
-          dprintf(3, "looking for %s, got %p (size %i).\n", &buffer[0], filedata, filesize);
+          snprintf(&buffer[0], sizeof(buffer), "bootsplash%d.bmp", i);
+          dprintf(3, "looking for %s, got %p (size %d).\n", &buffer[0], filedata, filesize);
           filedata = romfile_loadfile(&buffer[0], &filesize);
           if (!filedata)
               return;
